@@ -40,50 +40,48 @@ export default function Header() {
           </svg>
         </button>
       </div>
-      {/* Mobile Side Drawer */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-50 flex">
-          {/* Overlay */}
-          <div className="fixed inset-0 bg-black/30" onClick={() => setMenuOpen(false)} aria-label="Close menu overlay"></div>
-          {/* Drawer */}
-          <nav className="relative w-80 max-w-full h-full bg-white shadow-xl flex flex-col p-0 animate-slide-in-left">
-            <div className="flex items-center justify-between px-6 py-4 border-b">
-              <span className="text-lg font-semibold">Navigation</span>
-              <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="p-2 rounded hover:bg-gray-100">
-                <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            <ul className="flex-1 flex flex-col gap-1 px-2 py-4">
-              {navLinks.map(({ href, label, icon: Icon }) => (
-                <li key={href}>
-                  <a
-                    href={href}
-                    className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 text-gray-800 font-medium transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <Icon className="w-5 h-5" />
-                    <span>{label}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <div className="px-6 py-4 border-t text-center text-xs text-gray-500 bg-gray-50">
-              IAS Officer Portal<br />Dr. Bilal Mohi-Ud-Din Bhat IAS
-            </div>
-          </nav>
-        </div>
-      )}
-      <style jsx global>{`
-        @keyframes slide-in-left {
-          from { transform: translateX(-100%); }
-          to { transform: translateX(0); }
-        }
-        .animate-slide-in-left {
-          animation: slide-in-left 0.25s cubic-bezier(0.4,0,0.2,1);
-        }
-      `}</style>
+      {/* Mobile Sidebar Drawer */}
+      <div className={`fixed inset-0 z-50 flex md:hidden transition-all duration-300 ${menuOpen ? '' : 'pointer-events-none'}`}
+        aria-hidden={!menuOpen}
+      >
+        {/* Overlay */}
+        <div
+          className={`fixed inset-0 bg-black/40 transition-opacity duration-300 ${menuOpen ? 'opacity-100' : 'opacity-0'}`}
+          onClick={() => setMenuOpen(false)}
+          aria-label="Close menu overlay"
+        ></div>
+        {/* Sidebar Drawer */}
+        <nav
+          className={`relative w-72 max-w-full h-full bg-white shadow-xl flex flex-col p-0 transform transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'}`}
+          tabIndex={menuOpen ? 0 : -1}
+        >
+          <div className="flex items-center justify-between px-6 py-4 border-b">
+            <span className="text-lg font-semibold">Navigation</span>
+            <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="p-2 rounded hover:bg-gray-100">
+              <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <ul className="flex-1 flex flex-col gap-1 px-2 py-4">
+            {navLinks.map(({ href, label, icon: Icon }) => (
+              <li key={href}>
+                <a
+                  href={href}
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 text-gray-800 font-medium transition-colors"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span>{label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="px-6 py-4 border-t text-center text-xs text-gray-500 bg-gray-50">
+            IAS Officer Portal<br />Dr. Bilal Mohi-Ud-Din Bhat IAS
+          </div>
+        </nav>
+      </div>
     </header>
   );
 } 
