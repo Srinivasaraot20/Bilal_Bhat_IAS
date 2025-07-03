@@ -15,33 +15,35 @@ export default function Header() {
 
   return (
     <header className="w-full bg-white border-b border-gray-200 fixed top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 h-16 relative">
-        {/* Hamburger menu for mobile (left) */}
-        <div className="flex items-center w-full md:w-auto">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 h-16">
+        {/* Left: Hamburger menu (mobile only) */}
+        <div className="flex-1 flex items-center">
           <button
-            className="md:hidden flex items-center justify-center p-2 rounded hover:bg-gray-100 focus:outline-none mr-2"
+            className="md:hidden flex items-center justify-center p-2 rounded hover:bg-gray-100 focus:outline-none"
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
             style={{ zIndex: 60 }}
           >
             <Menu className="w-7 h-7 text-gray-700" />
           </button>
-          {/* Logo and title */}
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-green-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">BB</span>
-            </div>
-            <span className="font-bold text-xl text-gray-900">Bilal Bhat IAS</span>
-          </div>
         </div>
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {navLinks.map(({ href, label }) => (
-            <a key={href} href={href} className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
-              {label}
-            </a>
-          ))}
-        </nav>
+        {/* Center: Logo and title */}
+        <div className="flex-1 flex items-center justify-center md:justify-start space-x-2">
+          <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-green-600 rounded-lg flex items-center justify-center">
+            <span className="text-white font-bold text-lg">BB</span>
+          </div>
+          <span className="font-bold text-xl text-gray-900">Bilal Bhat IAS</span>
+        </div>
+        {/* Right: Desktop nav or empty */}
+        <div className="flex-1 flex items-center justify-end">
+          <nav className="hidden md:flex items-center space-x-8">
+            {navLinks.map(({ href, label }) => (
+              <a key={href} href={href} className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
+                {label}
+              </a>
+            ))}
+          </nav>
+        </div>
       </div>
       {/* Mobile Sidebar Drawer */}
       <div
