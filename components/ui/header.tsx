@@ -1,15 +1,13 @@
 "use client";
 import { useState } from 'react';
-import { Home, User, GraduationCap, FileText, Search, Shield, Calendar } from 'lucide-react';
+import { Home, Book, GraduationCap, FileText, Users, Menu, X, LifeBuoy } from 'lucide-react';
 
 const navLinks = [
   { href: '/', label: 'Home', icon: Home },
-  { href: '/about', label: 'Officer Profile', icon: User },
-  { href: '/resources', label: 'Education Hub', icon: GraduationCap },
-  { href: '/mock-tests', label: 'Submit Request', icon: FileText },
-  { href: '/track-request', label: 'Track Request', icon: Search },
-  { href: '/login', label: 'Officer Login', icon: Shield },
-  { href: '/admin/dashboard', label: 'Department Login', icon: Calendar },
+  { href: '/resources', label: 'IAS Resources', icon: GraduationCap },
+  { href: '/books', label: 'My Books', icon: Book },
+  { href: '/mock-tests', label: 'Mock Tests', icon: FileText },
+  { href: '/guidance', label: 'Get Guidance', icon: LifeBuoy },
 ];
 
 export default function Header() {
@@ -17,13 +15,23 @@ export default function Header() {
 
   return (
     <header className="w-full bg-white border-b border-gray-200 fixed top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 h-16">
-        <div className="flex items-center space-x-2">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 h-16 relative">
+        {/* Hamburger menu for mobile (left) */}
+        <button
+          className="md:hidden flex items-center justify-center p-2 rounded hover:bg-gray-100 focus:outline-none absolute left-4 top-1/2 -translate-y-1/2"
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open menu"
+        >
+          <Menu className="w-7 h-7 text-gray-700" />
+        </button>
+        {/* Logo and title (centered on mobile, left on desktop) */}
+        <div className="flex items-center space-x-2 mx-auto md:mx-0 md:ml-0 md:pl-0 pl-12 md:pl-0">
           <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-green-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-lg">BB</span>
           </div>
           <span className="font-bold text-xl text-gray-900">Bilal Bhat IAS</span>
         </div>
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map(({ href, label }) => (
             <a key={href} href={href} className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
@@ -31,15 +39,6 @@ export default function Header() {
             </a>
           ))}
         </nav>
-        <button
-          className="md:hidden flex items-center justify-center p-2 rounded hover:bg-gray-100 focus:outline-none"
-          onClick={() => setMenuOpen(true)}
-          aria-label="Open menu"
-        >
-          <svg className="w-7 h-7 text-gray-700" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
       </div>
       {/* Mobile Sidebar Drawer */}
       <div
@@ -57,12 +56,10 @@ export default function Header() {
           className={`relative w-72 max-w-full h-full bg-white shadow-xl flex flex-col p-0 transform transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'}`}
           tabIndex={menuOpen ? 0 : -1}
         >
-          <div className="flex items-center justify-between px-6 py-4 border-b">
-            <span className="text-lg font-semibold">Navigation</span>
+          <div className="flex items-center justify-between px-6 py-4 border-b sticky top-0 bg-white z-10">
+            <span className="text-lg font-semibold">Menu</span>
             <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="p-2 rounded hover:bg-gray-100">
-              <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <X className="w-6 h-6 text-gray-700" />
             </button>
           </div>
           <ul className="flex-1 flex flex-col gap-1 px-2 py-4">
