@@ -17,19 +17,22 @@ export default function Header() {
     <header className="w-full bg-white border-b border-gray-200 fixed top-0 left-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 h-16 relative">
         {/* Hamburger menu for mobile (left) */}
-        <button
-          className="md:hidden flex items-center justify-center p-2 rounded hover:bg-gray-100 focus:outline-none absolute left-4 top-1/2 -translate-y-1/2"
-          onClick={() => setMenuOpen(true)}
-          aria-label="Open menu"
-        >
-          <Menu className="w-7 h-7 text-gray-700" />
-        </button>
-        {/* Logo and title (centered on mobile, left on desktop) */}
-        <div className="flex items-center space-x-2 mx-auto md:mx-0 md:ml-0 md:pl-0 pl-12 md:pl-0">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-green-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg">BB</span>
+        <div className="flex items-center w-full md:w-auto">
+          <button
+            className="md:hidden flex items-center justify-center p-2 rounded hover:bg-gray-100 focus:outline-none mr-2"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open menu"
+            style={{ zIndex: 60 }}
+          >
+            <Menu className="w-7 h-7 text-gray-700" />
+          </button>
+          {/* Logo and title */}
+          <div className="flex items-center space-x-2">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-green-600 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-lg">BB</span>
+            </div>
+            <span className="font-bold text-xl text-gray-900">Bilal Bhat IAS</span>
           </div>
-          <span className="font-bold text-xl text-gray-900">Bilal Bhat IAS</span>
         </div>
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center space-x-8">
